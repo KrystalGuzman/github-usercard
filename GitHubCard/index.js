@@ -82,7 +82,7 @@ axios.get('https://api.github.com/users/krystalguzman/followers')
   bigknell
 */
 
-function newCard(gitObject){
+function newCard(obj){
   const card = document.createElement('div'),
     userIMG = document.createElement('img'),
     cardInfo = document.createElement('div'),
@@ -104,16 +104,16 @@ function newCard(gitObject){
   calendar.classList.add('calendar', 'dis-none');
   button.classList.add('closed');
 
-  userIMG.src = gitObject.data.avatar_url;
-  realName.textContent = gitObject.data.name;
-  userName.textContent = gitObject.data.login;
-  location.textContent = `Location: ${gitObject.data.location}`;
+  userIMG.src = obj.data.avatar_url;
+  realName.textContent = obj.data.name;
+  userName.textContent = obj.data.login;
+  location.textContent = `Location: ${obj.data.location}`;
   profile.textContent = 'Profile: ';
-  link.textContent = gitObject.data.html_url;
-  link.href = gitObject.data.html_url;
-  followers.textContent = `Followers: ${gitObject.data.followers}`;
-  following.textContent = `Following: ${gitObject.data.following}`;
-  bio.textContent = gitObject.data.bio;
+  link.textContent = obj.data.html_url;
+  link.href = obj.data.html_url;
+  followers.textContent = `Followers: ${obj.data.followers}`;
+  following.textContent = `Following: ${obj.data.following}`;
+  bio.textContent = obj.data.bio;
   button.textContent = 'Expand';
 
   card.append(userIMG);
@@ -139,83 +139,6 @@ function newCard(gitObject){
   return card;
 }
 
-// }
-/* Step 3: Create a function that accepts a single object as its only argument,
-          Using DOM methods and properties, create a component that will return the following DOM element:
-
-
-          
-<div class="card">
-  <img src={image url of user} />
-  <div class="card-info">
-    <h3 class="name">{users name}</h3>
-    <p class="username">{users user name}</p>
-    <p>Location: {users location}</p>
-    <p>Profile:  
-      <a href={address to users github page}>{address to users github page}</a>
-    </p>
-    <p>Followers: {users followers count}</p>
-    <p>Following: {users following count}</p>
-    <p>Bio: {users bio}</p>
-  </div>
-</div>
-
-*/
-
-const cards = document.querySelector('.cards');
-
-function createComponent(gitObject){
-  console.log("I am in createComponent()."); 
-  
-  var outerDiv = document.createElement("div"); 
-  outerDiv.classList.add("card"); 
-
-  var image = document.createElement("img"); 
-  image.setAttribute("src", gitObject.data.avatar_url);
-  outerDiv.appendChild(image); 
-
-  var innerDiv = document.createElement("div"); 
-  innerDiv.classList.add("card-info"); 
-  var h3 = document.createElement("h3"); 
-  h3.classList.add("name"); 
-  h3.textContent = gitObject.data.name; 
-  innerDiv.appendChild(h3); 
-  var userNameP = document.createElement("p"); 
-  userNameP.classList.add("username"); 
-  userNameP.textContent = gitObject.data.login;
-  innerDiv.appendChild(userNameP); 
-  var locationP = document.createElement("p"); 
-  locationP.textContent = ("Location: " + gitObject.data.location);
-  innerDiv.appendChild(locationP);  
-  
-  var a = document.createElement('a'); 
-  var linkText = document.createTextNode(gitObject.data.html_url);
-  a.appendChild(linkText); 
-  a.href = gitObject.data.html_url; 
-  innerDiv.appendChild(a); 
-  var profileP = document.createElement('p'); 
-  profileP.textContent = "Profile: ";
-  profileP.appendChild(a); 
-  innerDiv.appendChild(profileP); 
-
-  var followersP = document.createElement('p'); 
-  followersP.textContent = ("Followers: " + gitObject.data.followers);
-  innerDiv.appendChild(followersP); 
-
-  var followingP = document.createElement('p'); 
-  followingP.textContent = ("Following: " + gitObject.data.following);
-  innerDiv.appendChild(followingP); 
-
-  var bioP = document.createElement('p'); 
-  bioP.textContent = (gitObject.data.bio); 
-  innerDiv.appendChild(bioP); 
-  
-
-  outerDiv.appendChild(innerDiv); 
-
-  console.log(outerDiv); 
-  return outerDiv; 
-}
 
 
 
